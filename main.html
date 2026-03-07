@@ -29,7 +29,7 @@
 
 <body class="bg-[#F8FAFC]">
     <!-- header section starts here  -->
-    <header class="py-6 px-20 bg-base-100 flex flex-col lg:flex-row gap-5 lg:justify-between items-center rounded-lg ">
+    <header class="py-6 px-20 bg-base-100 flex flex-col md:flex-row gap-5 md:justify-between items-center rounded-lg ">
         <div class="flex items-center gap-2">
             <div><img class="w-12" src="./assets/github-logo.png" alt="Github logo"></div>
             <h2 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h2>
@@ -44,37 +44,233 @@
     </header>
 
     <!-- main section starts here  -->
-    <section class="my-10 w-9/12 mx-auto space-y-5">
+    <section class="my-10 w-11/12 md:w-10/12 mx-auto space-y-5">
         <!-- tabs section -->
-        <div class="flex bg-base-100 px-4 py-5 gap-5">
+        <div class="flex bg-base-100 px-4 py-5 gap-5 justify-center md:justify-start">
             <button class="btn btn-primary w-28" type="button">All</button>
             <button class="btn w-28" type="button">Open</button>
             <button class="w-28 btn" type="button">Closed</button>
         </div>
 
         <!-- section header to show status -->
-         <header class="flex bg-base-100 p-4 gap-5 justify-between items-center">
+        <div class="flex bg-base-100 p-4 gap-5 justify-between items-center">
             <div class="flex items-center gap-2">
                 <div><img src="./assets/Aperture.png"></div>
 
                 <div>
-                    <h3 class="text-xl font-semibold text-[#1F2937]">50 Issues</h3>
-                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                    <h3 class="text-lg md:text-xl font-semibold text-[#1F2937]">50 Issues</h3>
+                    <p class="text-[#64748B] text-xs md:text-base w-10/12 md:w-full">Track and manage your project issues</p>
                 </div>
             </div>
 
-            <div class="flex gap-5">
-                <div class="flex gap-1">
+            <div class="flex flex-col md:flex-row gap-5">
+                <div class="flex gap-1 items-center">
                     <div><img src="./assets/Open-Status.png"></div>
-                    <p class="font-medium text-[#1F2937]">Open</p>
+                    <p class="font-medium text-xs md:text-base text-[#1F2937]">Open <span class="font-bold">44</span></p>
                 </div>
 
-                <div class="flex gap-1">
+                <div class="flex gap-1 items-center">
                     <div><img src="./assets/Closed-Status.png"></div>
-                    <p class="font-medium text-[#1F2937]">Closed</p>
+                    <p class="font-medium text-xs md:text-base text-[#1F2937]">Closed <span class="font-bold">6</span></p>
                 </div>
             </div>
-         </header>
+        </div>
+
+        <!-- cards container starts here -->
+        <section class="mx-3 bg-[#FBFBFB] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+                    
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+            
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+            
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+            
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+                    
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+            
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+            
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+            
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+                    
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+
+            <!-- card  -->
+            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
+                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/Open-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                    </div>
+            
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">Fix navigation menu on mobile devices</h3>
+                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                    </div>
+            
+                    <div class="flex gap-2">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                            <div><img src="./assets/BugDroid.png"></div>
+                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
+                        </div>
+            
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
+                            <div><img src="./assets/Lifebuoy.png"></div>
+                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="p-4 space-y-3">
+                    <p class="text-xs text-[#64748B]">#1 by john_doe</p>
+                    <p class="text-xs text-[#64748B]">1/15/2024</p>
+                </div>
+            </div>
+        </section>
+         
     </section>
 
     <script src="./scripts/main.js"></script>
