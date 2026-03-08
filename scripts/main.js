@@ -1,3 +1,4 @@
+
 let activeStatus = '';
 const statusTabs = document.querySelectorAll('.status-btn');
 statusTabs.forEach(tab => {
@@ -26,33 +27,30 @@ const loadCommits = async (status) => {
 }
 
 const displayIssues = (issues, status) => {
-    //get the counter
-    const issueCounter = document.getElementById("issues-counter");
     // Get the issue card container and make it empty
     const issuesContainer = document.getElementById("issues-container");
     issuesContainer.innerHTML = '';
 
     issues.forEach(issue => {
         if(status === 'all'){
-            issueCounter.innerText = issues.length;
-
             const issueDiv = document.createElement('div');
             issueDiv.innerHTML = `
                 <!-- card  -->
-            <div class="rounded-md bg-base-100 shadow border-t-4 border-t-[#00A96E] transition-all hover:scale-101">
-                <div class="p-4 border-b-2 border-b-[#EFEFEF] space-y-3">
+            <div class="h-full flex flex-col justify-between rounded-md bg-base-100 shadow border-t-4 border-t-[${borderColor(issue.status)}] transition-all hover:scale-101">
+                <div class="p-4 space-y-3">
                     <div class="flex justify-between">
-                        <div><img src="./assets/Open-Status.png"></div>
-                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">HIGH</p>
+                        <div><img src="./assets/${issue.status}-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">${issue.priority.toUpperCase()}</p>
                     </div>
                     
                     <div class="space-y-2">
-                        <h3 class="text-sm font-semibold text-[#1F2937]">hello</h3>
-                        <p class="text-xs text-[#64748B]">The navigation menu doesn't collapse properly on mobile devices...</p>
+                        <h3 class="text-sm font-semibold text-[#1F2937]">${issue.title}</h3>
+                        <p class="text-xs text-[#64748B]">${issue.description}</p>
                     </div>
                     
+                    <!-- labels container -->
                     <div class="flex gap-2">
-                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444] flex items-center gap-1">
+                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444]">
                             <div><img src="./assets/BugDroid.png"></div>
                             <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
                         </div>
@@ -64,7 +62,7 @@ const displayIssues = (issues, status) => {
                     </div>
                 </div>
 
-                <div class="flex justify-between">
+                <div class="flex justify-between  border-t-2 border-t-[#EFEFEF]">
                     <div class="p-4 space-y-3">
                         <p class="text-xs text-[#64748B]">Author: <span></span></p>
                         <p class="text-xs text-[#64748B]">Assignee: <span></span></p>
@@ -80,9 +78,21 @@ const displayIssues = (issues, status) => {
             `;
 
             issuesContainer.append(issueDiv);
+            console.log(issue.labels)
+            return;
         }
         if(issue.status === status){
-            console.log(issue)
         }
     })
+    
+}
+
+//function to set border color based on status
+const borderColor = (status) => {
+    if(status === 'open'){
+        return "#00A96E";
+    }
+    if(status === 'closed'){
+        return "#A855F7";
+    }
 }
