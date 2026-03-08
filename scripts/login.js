@@ -18,5 +18,6 @@ document.getElementById('sign-in-btn').addEventListener('click', () => {
         return;
     }
 
-    window.location.href = "../main.html";
+    alert("Login Successful");
+    return window.location.href = "../main.html";
 });
