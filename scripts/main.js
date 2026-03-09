@@ -1,5 +1,5 @@
 
-let activeStatus = '';
+let activeStatus = 'all';
 const statusTabs = document.querySelectorAll('.status-btn');
 statusTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -32,6 +32,9 @@ const displayIssues = (issues, status) => {
     issuesContainer.innerHTML = '';
 
     issues.forEach(issue => {
+
+        //get the priority texts
+        const priority = issue.priority;
         if(status === 'all'){
             const issueDiv = document.createElement('div');
             issueDiv.innerHTML = `
@@ -40,7 +43,7 @@ const displayIssues = (issues, status) => {
                 <div class="p-4 space-y-3">
                     <div class="flex justify-between">
                         <div><img src="./assets/${issue.status}-Status.png"></div>
-                        <p class="w-fit px-8 py-2 rounded-full bg-[#FEECEC] text-[#EF4444] text-xs font-medium">${issue.priority.toUpperCase()}</p>
+                        <p class="w-fit px-8 py-2 rounded-full ${priority} text-xs font-medium">${issue.priority.toUpperCase()}</p>
                     </div>
                     
                     <div class="space-y-2">
@@ -49,17 +52,7 @@ const displayIssues = (issues, status) => {
                     </div>
                     
                     <!-- labels container -->
-                    <div class="flex gap-2">
-                        <div class="w-fit px-4 py-2 rounded-full bg-[#FEECEC] border border-[#EF4444]">
-                            <div><img src="./assets/BugDroid.png"></div>
-                            <p class=" text-[#EF4444] text-xs font-medium">BUG</p>
-                        </div>
-                    
-                        <div class="w-fit px-4 py-2 rounded-full bg-[#FFF8DB] border border-[#D97706] flex items-center gap-1">
-                            <div><img src="./assets/Lifebuoy.png"></div>
-                            <p class=" text-[#D97706] text-xs font-medium">HELP WANTED</p>
-                        </div>
-                    </div>
+                    <div class="flex gap-2"> ${displayLabel(issue.labels)} </div>
                 </div>
 
                 <div class="flex justify-between  border-t-2 border-t-[#EFEFEF]">
@@ -78,10 +71,10 @@ const displayIssues = (issues, status) => {
             `;
 
             issuesContainer.append(issueDiv);
-            console.log(issue.labels)
             return;
         }
         if(issue.status === status){
+            
         }
     })
     
@@ -96,3 +89,14 @@ const borderColor = (status) => {
         return "#A855F7";
     }
 }
+
+//function to display labels
+const displayLabel = (labels) => {
+    const createElement = labels.map(
+      (el) =>
+        `<div class="w-fit px-2 py-1 rounded-full flex items-center gap-1 text-xs border ${el.split(" ").join("-")}"><div><img src="../assets/${el.split(" ").join("-")}.png"></div><div>${el.toUpperCase()}</div></div>`,
+    );
+    return createElement.join(' ');
+};
+
+loadCommits(activeStatus);
