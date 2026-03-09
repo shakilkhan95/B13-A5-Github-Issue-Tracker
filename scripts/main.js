@@ -1,43 +1,41 @@
+let activeStatus = "all";
+const statusTabs = document.querySelectorAll(".status-btn");
+statusTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activeStatus = tab.value;
 
-let activeStatus = 'all';
-const statusTabs = document.querySelectorAll('.status-btn');
-statusTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        activeStatus = tab.value;
-        
-        toggleStatus(tab);
-        loadCommits(activeStatus);
-    });
-})
+    toggleStatus(tab);
+    loadCommits(activeStatus);
+  });
+});
 
 //function to toggle status styles based on clicking button
 const toggleStatus = (clickedTab) => {
-    statusTabs.forEach(tab => {
-        tab.classList.remove('btn-primary');
-    });
-    clickedTab.classList.add('btn-primary');
-}
+  statusTabs.forEach((tab) => {
+    tab.classList.remove("btn-primary");
+  });
+  clickedTab.classList.add("btn-primary");
+};
 
 // function to fetch data from api
 const loadCommits = async (status) => {
-    const issuesUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
-    const res = await fetch(issuesUrl);
-    const issues = await res.json();
-    displayIssues(issues.data, status);
-}
+  const issuesUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+  const res = await fetch(issuesUrl);
+  const issues = await res.json();
+  displayIssues(issues.data, status);
+};
 
 const displayIssues = (issues, status) => {
-    // Get the issue card container and make it empty
-    const issuesContainer = document.getElementById("issues-container");
-    issuesContainer.innerHTML = '';
+  // Get the issue card container and make it empty
+  const issuesContainer = document.getElementById("issues-container");
+  issuesContainer.innerHTML = "";
 
-    issues.forEach(issue => {
-
-        //get the priority texts
-        const priority = issue.priority;
-        if(status === 'all'){
-            const issueDiv = document.createElement('div');
-            issueDiv.innerHTML = `
+  issues.forEach((issue) => {
+    //get the priority texts
+    const priority = issue.priority;
+    if (status === "all") {
+      const issueDiv = document.createElement("div");
+      issueDiv.innerHTML = `
                 <!-- card  -->
             <div class="h-full flex flex-col justify-between rounded-md bg-base-100 shadow border-t-4 border-t-[${borderColor(issue.status)}] transition-all hover:scale-101">
                 <div class="p-4 space-y-3">
@@ -57,46 +55,80 @@ const displayIssues = (issues, status) => {
 
                 <div class="flex justify-between  border-t-2 border-t-[#EFEFEF]">
                     <div class="p-4 space-y-3">
-                        <p class="text-xs text-[#64748B]">Author: <span></span></p>
-                        <p class="text-xs text-[#64748B]">Assignee: <span></span></p>
+                        <p class="text-xs text-[#64748B]">Author: ${issue.author}</p>
+                        <p class="text-xs text-[#64748B]">Assignee: ${issue.assignee}</p>
                         
                     </div>
 
                     <div class="p-4 space-y-3">
-                        <p class="text-xs text-[#64748B]">Created: <span></span></p>
-                        <p class="text-xs text-[#64748B]">Updated: <span></span></p>
+                        <p class="text-xs text-[#64748B]">${issue.createdAt}</p>
+                        <p class="text-xs text-[#64748B]">${issue.updatedAt}</p>
                     </div>
                 </div>
             </div>
             `;
 
-            issuesContainer.append(issueDiv);
-            return;
-        }
-        if(issue.status === status){
-            
-        }
-    })
-    
-}
+      issuesContainer.append(issueDiv);
+      return;
+    }
+    if (issue.status === status) {
+      const issueDiv = document.createElement("div");
+      issueDiv.innerHTML = `
+                <!-- card  -->
+            <div class="h-full flex flex-col justify-between rounded-md bg-base-100 shadow border-t-4 border-t-[${borderColor(issue.status)}] transition-all hover:scale-101">
+                <div class="p-4 space-y-3">
+                    <div class="flex justify-between">
+                        <div><img src="./assets/${issue.status}-Status.png"></div>
+                        <p class="w-fit px-8 py-2 rounded-full ${priority} text-xs font-medium">${issue.priority.toUpperCase()}</p>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h3 class="text-sm font-semibold text-[#1F2937]">${issue.title}</h3>
+                        <p class="text-xs text-[#64748B]">${issue.description}</p>
+                    </div>
+                    
+                    <!-- labels container -->
+                    <div class="flex gap-2"> ${displayLabel(issue.labels)} </div>
+                </div>
+
+                <div class="flex justify-between  border-t-2 border-t-[#EFEFEF]">
+                    <div class="p-4 space-y-3">
+                        <p class="text-xs text-[#64748B]">Author: ${issue.author}</p>
+                        <p class="text-xs text-[#64748B]">Assignee: ${issue.assignee}</p>
+                        
+                    </div>
+
+                    <div class="p-4 space-y-3">
+                        <p class="text-xs text-[#64748B]">${issue.createdAt}</p>
+                        <p class="text-xs text-[#64748B]">${issue.updatedAt}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+
+      issuesContainer.append(issueDiv);
+      return;
+    }
+  });
+};
 
 //function to set border color based on status
 const borderColor = (status) => {
-    if(status === 'open'){
-        return "#00A96E";
-    }
-    if(status === 'closed'){
-        return "#A855F7";
-    }
-}
+  if (status === "open") {
+    return "#00A96E";
+  }
+  if (status === "closed") {
+    return "#A855F7";
+  }
+};
 
 //function to display labels
 const displayLabel = (labels) => {
-    const createElement = labels.map(
-      (el) =>
-        `<div class="w-fit px-2 py-1 rounded-full flex items-center gap-1 text-xs border ${el.split(" ").join("-")}"><div><img src="../assets/${el.split(" ").join("-")}.png"></div><div>${el.toUpperCase()}</div></div>`,
-    );
-    return createElement.join(' ');
+  const createElement = labels.map(
+    (el) =>
+      `<div class="w-fit px-2 py-1 rounded-full flex items-center gap-1 text-xs border ${el.split(" ").join("-")}"><div><img src="../assets/${el.split(" ").join("-")}.png"></div><div>${el.toUpperCase()}</div></div>`,
+  );
+  return createElement.join(" ");
 };
 
 loadCommits(activeStatus);
