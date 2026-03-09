@@ -173,7 +173,7 @@ const displayDetails = (issues) => {
                 <h1 class="text-xl font-bold text-[#1F2937]">${issues.title}</h1>
 
                 <div class="flex gap-3 flex-col md:flex-row justify-center items-center md:justify-start">
-                    <span class="px-3 py-2 rounded-full bg-[#00A96E] text-white text-xs font-medium w-fit">${issues.status.toUpperCase()}ED</span>
+                    <span class="px-3 py-2 rounded-full bg-[${borderColor(issues.status)}] text-white text-xs font-medium w-fit">${issues.status.toUpperCase()}</span>
                     <span class="text-[#64748B] text-xs">Opened by ${issues.author}</span>
                     <span class="text-[#64748B] text-xs">${issues.updatedAt}</span>
                 </div>

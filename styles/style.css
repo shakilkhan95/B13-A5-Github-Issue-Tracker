@@ -2,6 +2,12 @@
     font-family: "Geist", sans-serif;
 }
 
+/*status */
+.open{
+    background-color: #00A96E;
+    color: ;
+}
+
 /* priority */
 .high {
     background-color: #FEECEC;
