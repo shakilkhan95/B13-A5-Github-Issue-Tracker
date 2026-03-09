@@ -6,6 +6,7 @@ statusTabs.forEach((tab) => {
 
     toggleStatus(tab);
     loadCommits(activeStatus);
+    setCounter(activeStatus);
   });
 });
 
@@ -22,6 +23,7 @@ const loadCommits = async (status) => {
   const issuesUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const res = await fetch(issuesUrl);
   const issues = await res.json();
+
   displayIssues(issues.data, status);
 };
 
@@ -75,7 +77,7 @@ const displayIssues = (issues, status) => {
       const issueDiv = document.createElement("div");
       issueDiv.innerHTML = `
                 <!-- card  -->
-            <div class="h-full flex flex-col justify-between rounded-md bg-base-100 shadow border-t-4 border-t-[${borderColor(issue.status)}] transition-all hover:scale-101">
+            <div class="h-full flex flex-col justify-between rounded-md bg-base-100 shadow border-t-4 border-t-[${borderColor(issue.status)}] transition-all hover:scale-101  other-card">
                 <div class="p-4 space-y-3">
                     <div class="flex justify-between">
                         <div><img src="./assets/${issue.status}-Status.png"></div>
@@ -131,4 +133,25 @@ const displayLabel = (labels) => {
   return createElement.join(" ");
 };
 
+//function to set counter
+const setCounter = (status) =>{
+    const counter = document.getElementById("issues-counter");
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+    .then(res=> res.json())
+    .then(data => {
+        const issues = data.data;
+        if(status === 'all'){
+            counter.innerText = issues.length;
+            return;
+        }
+        else{
+            const filteredIssues = issues.filter(issue => issue.status === status);
+            counter.innerText = filteredIssues.length;
+        }
+
+    })
+};
+
+setCounter(activeStatus);
 loadCommits(activeStatus);
