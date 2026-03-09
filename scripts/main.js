@@ -20,6 +20,7 @@ const toggleStatus = (clickedTab) => {
 
 // function to fetch data from api
 const loadCommits = async (status) => {
+    controlSpinner(true);
   const issuesUrl = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const res = await fetch(issuesUrl);
   const issues = await res.json();
@@ -71,6 +72,7 @@ const displayIssues = (issues, status) => {
             `;
 
       issuesContainer.append(issueDiv);
+      controlSpinner(false);
       return;
     }
     if (issue.status === status) {
@@ -109,6 +111,7 @@ const displayIssues = (issues, status) => {
             `;
 
       issuesContainer.append(issueDiv);
+      controlSpinner(false);
       return;
     }
   });
@@ -169,8 +172,8 @@ const displayDetails = (issues) => {
             <div class="bg-white w-11/12 max-w-[700px] mx-auto rounded-lg p-6 space-y-6">
                 <h1 class="text-xl font-bold text-[#1F2937]">${issues.title}</h1>
 
-                <div class="space-x-2.5">
-                    <span class="px-3 py-2 rounded-full bg-[#00A96E] text-white text-xs font-medium">${issues.status.toUpperCase()}ED</span>
+                <div class="flex gap-3 flex-col md:flex-row justify-center md:justify-start">
+                    <span class="px-3 py-2 rounded-full bg-[#00A96E] text-white text-xs font-medium w-fit">${issues.status.toUpperCase()}ED</span>
                     <span class="text-[#64748B] text-xs">Opened by ${issues.author}</span>
                     <span class="text-[#64748B] text-xs">${issues.updatedAt}</span>
                 </div>
@@ -196,6 +199,35 @@ const displayDetails = (issues) => {
     `;
     document.getElementById("issue_details").showModal();
 }
+
+// function to control spinner 
+const controlSpinner = (status) => {
+    if(status){
+        document.getElementById("spinner").classList.remove('hidden');
+        document.getElementById("issues-container").classList.add("hidden");
+    } else{
+        document.getElementById("spinner").classList.add("hidden");
+        document.getElementById("issues-container").classList.remove("hidden");
+    }
+}
+
+// function to search issues
+document.getElementById("search-btn").addEventListener('click', () => {
+    //get the value from search input 
+    const searchInput = document.getElementById("search-input");
+    const searchValue = searchInput.value.trim().toLowerCase();
+    if(searchValue === ''){
+        alert('Enter a word to search');
+        return;
+    }
+    
+    // fetch and get the data from api 
+    fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`,
+    )
+      .then((res) => res.json())
+      .then((data) => displayIssues(data.data, activeStatus));
+});
 
 setCounter(activeStatus);
 loadCommits(activeStatus);
