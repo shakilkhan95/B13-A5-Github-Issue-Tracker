@@ -172,14 +172,14 @@ const displayDetails = (issues) => {
             <div class="bg-white w-11/12 max-w-[700px] mx-auto rounded-lg p-6 space-y-6">
                 <h1 class="text-xl font-bold text-[#1F2937]">${issues.title}</h1>
 
-                <div class="flex gap-3 flex-col md:flex-row justify-center md:justify-start">
+                <div class="flex gap-3 flex-col md:flex-row justify-center items-center md:justify-start">
                     <span class="px-3 py-2 rounded-full bg-[#00A96E] text-white text-xs font-medium w-fit">${issues.status.toUpperCase()}ED</span>
                     <span class="text-[#64748B] text-xs">Opened by ${issues.author}</span>
                     <span class="text-[#64748B] text-xs">${issues.updatedAt}</span>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <div class="flex gap-2"> ${displayLabel(issues.labels)} </div>
+                    <div class="flex flex-col md:flex-row gap-2"> ${displayLabel(issues.labels)} </div>
                 </div>
 
                 <p class="text-base text-[#64748B]">${issues.description}</p>
